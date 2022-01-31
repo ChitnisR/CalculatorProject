@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/new_calculator_project.iml" filepath="$PROJECT_DIR$/.idea/new_calculator_project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CalculatorProject.iml" filepath="$PROJECT_DIR$/.idea/CalculatorProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Seleniumproject/.idea/Seleniumproject.iml" filepath="$PROJECT_DIR$/../Seleniumproject/.idea/Seleniumproject.iml" />
     </modules>
   </component>
 </project>

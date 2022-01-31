@@ -16,5 +16,5 @@ class OperationsList:
         self.driver.find_element(By.XPATH,"//span[text()='+']").click()
 
     def clickSub(self):
-        self.driver.find_element(By.XPATH,"//span[text()='-']").click()
+        self.driver.find_element(By.XPATH,"//span[text()='–']").click()
 
