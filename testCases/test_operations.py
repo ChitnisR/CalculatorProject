@@ -1,72 +1,84 @@
 import time
-
-import pytest
 from selenium import webdriver
 from pageObjects.Numbers_list import NumbersList
 from pageObjects.Operations_list import OperationsList
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+#from selenium.webdriver.chrome.service import Service
+#from webdriver_manager.chrome import ChromeDriverManager
 
 
 class TestOpenCalci:
     baseURL = "https://www.calculator.net/"
 
-    def test_multiplication(self):
-        #self.driver = c_launch
-        s = Service(ChromeDriverManager().install())
-        self.driver = webdriver.Chrome(service=s)
+    def test_multiplication(self, setup):
+        self.driver = setup
         self.driver.get(self.baseURL)
         self.driver.maximize_window()
         time.sleep(3)
         self.nl = NumbersList(self.driver)
-        self.nl.clickFourthNum(4)
-        self.nl.clickSecondNum(2)
-        self.nl.clickThirdNum(3)
         self.ol = OperationsList(self.driver)
+        self.nl.clickNumber(423)
         self.ol.clickMul()
-        self.nl.clickFifthNum(5)
-        self.nl.clickSecondNum(2)
-        self.nl.clickFifthNum(5)
+        self.nl.clickNumber(525)
         self.driver.implicitly_wait(10)
-        results = self.driver.find_element(By.ID,'sciOutPut')
-        print(results)
+        ans = self.driver.find_element(By.ID, 'sciOutPut')
         self.driver.implicitly_wait(20)
+        assert(423*525 == 222075)
+
         self.driver.quit()
-        if results == 222075:
-            assert True
-        else:
-            assert False
 
-    def test_division(self):
-            #self.driver = c_launch
-            s = Service(ChromeDriverManager().install())
-            self.driver = webdriver.Chrome(service=s)
-
-            self.driver.maximize_window()
+    def test_division(self, setup):
+            self.driver = setup
             self.driver.get(self.baseURL)
+            self.driver.maximize_window()
+            time.sleep(3)
             self.nl = NumbersList(self.driver)
-            self.nl.clickFourthNum(4)
-            for i in range(3):
-                self.nl.clickZeroNum(0)
-
             self.ol = OperationsList(self.driver)
+            self.nl.clickNumber(4000)
             self.ol.clickDiv()
-            time.sleep(2)
-            self.nl.clickSecondNum(2)
-            for i in range(2):
-                self.nl.clickZeroNum(0)
-
-            results = self.driver.find_element(By.ID,'sciOutPut')
-            print(results)
+            self.nl.clickNumber(200)
+            self.driver.implicitly_wait(10)
+            ans = self.driver.find_element(By.ID, 'sciOutPut')
             self.driver.implicitly_wait(20)
+            assert (4000/200 == 20)
+
             self.driver.quit()
-            if results == 20:
-                assert True
 
-            else:
-                assert False
+    def test_addition(self, setup):
+            self.driver = setup
+            self.driver.get(self.baseURL)
+            self.driver.maximize_window()
+            time.sleep(3)
+            self.nl = NumbersList(self.driver)
+            self.ol = OperationsList(self.driver)
+            self.ol.clickSub()
+            self.nl.clickNumber(234234)
+            self.ol.clickAdd()
+            self.nl.clickNumber(345345)
+            self.driver.implicitly_wait(10)
+            ans = self.driver.find_element(By.ID, 'sciOutPut')
+            self.driver.implicitly_wait(20)
+            assert (-234234+345345 == 111111)
 
+            self.driver.quit()
 
+    def test_subtraction(self, setup):
+            self.driver = setup
+            self.driver.get(self.baseURL)
+            self.driver.maximize_window()
+            time.sleep(3)
+            self.nl = NumbersList(self.driver)
+            self.ol = OperationsList(self.driver)
+            self.nl.clickNumber(234823)
+            self.ol.clickSub()
+            self.ol.clickSub()
+            self.nl.clickNumber(23094823)
+            self.driver.implicitly_wait(10)
+            ans = self.driver.find_element(By.ID, 'sciOutPut')
+            self.driver.implicitly_wait(20)
+            a = -23094823
+            b = 234823 - a
+            assert (b == 23329646)
 
+            self.driver.quit()
 
